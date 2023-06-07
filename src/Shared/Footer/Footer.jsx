@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <section className="relative overflow-hidden bg-[#eee2de] py-8">
-      <div className="container relative z-10 mx-auto px-4">
+      <div className="container relative z-10 mx-auto  px-4">
         <div className="-m-8 flex flex-wrap items-center justify-between">
           <div className="w-auto p-8">
             <a href="#">
@@ -112,6 +112,11 @@ const Footer = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="text-center mt-5">
+        <p className="font-medium text-gray-600 hover:text-gray-700">
+          © Copyright 2022. All Rights Reserved by Creative Snap
+        </p>
       </div>
     </section>
   );
