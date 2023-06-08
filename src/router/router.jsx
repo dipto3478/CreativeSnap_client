@@ -1,9 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../Layout/Main";
-import Home from "../pages/Home/Home";
 import ErrorPages from "../Shared/ErrorPages/ErrorPages";
 import Login from "../Shared/Login/Login";
 import SignUp from "../Shared/SignUp/SignUp";
+import Dashboard from "../Layout/Dashboard";
+import PrivateRouter from "./PrivateRouter";
+import Home from "../pages/Home/Home/Home";
 
 export const router = createBrowserRouter([
   {
@@ -24,5 +26,14 @@ export const router = createBrowserRouter([
   {
     path: "/signup",
     element: <SignUp />,
+  },
+  // Dashboard
+  {
+    path: "/dashboard",
+    element: (
+      <PrivateRouter>
+        <Dashboard />
+      </PrivateRouter>
+    ),
   },
 ]);

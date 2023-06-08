@@ -4,46 +4,48 @@ import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { toast } from "react-hot-toast";
 
-const nav = (
-  <>
-    <li>
-      <Link
-        className="inline-flex items-center text-sm font-semibold text-gray-800 hover:text-gray-900"
-        to="/"
-      >
-        Home
-      </Link>
-    </li>
-    <li>
-      <Link
-        className="inline-flex items-center text-sm font-semibold text-gray-800 hover:text-gray-900"
-        to="/instructors"
-      >
-        Instructors
-      </Link>
-    </li>
-    <li>
-      <Link
-        className="inline-flex items-center text-sm font-semibold text-gray-800 hover:text-gray-900"
-        to="/classes"
-      >
-        Classes
-      </Link>
-    </li>
-    <li>
-      <Link
-        className="inline-flex items-center text-sm font-semibold text-gray-800 hover:text-gray-900"
-        to="/dashboard"
-      >
-        Dashboard
-      </Link>
-    </li>
-  </>
-);
-
 const NavBar = () => {
   const { user, logOut } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const nav = (
+    <>
+      <li>
+        <Link
+          className="inline-flex items-center text-sm font-semibold text-gray-800 hover:text-gray-900"
+          to="/"
+        >
+          Home
+        </Link>
+      </li>
+      <li>
+        <Link
+          className="inline-flex items-center text-sm font-semibold text-gray-800 hover:text-gray-900"
+          to="/instructors"
+        >
+          Instructors
+        </Link>
+      </li>
+      <li>
+        <Link
+          className="inline-flex items-center text-sm font-semibold text-gray-800 hover:text-gray-900"
+          to="/classes"
+        >
+          Classes
+        </Link>
+      </li>
+      {user?.email && (
+        <li>
+          <Link
+            className="inline-flex items-center text-sm font-semibold text-gray-800 hover:text-gray-900"
+            to="/dashboard"
+          >
+            Dashboard
+          </Link>
+        </li>
+      )}
+    </>
+  );
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);

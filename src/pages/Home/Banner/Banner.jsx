@@ -5,12 +5,12 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "./Banner.css";
-import img1 from "../../assets/banner/image1.webp";
-import img2 from "../../assets/banner/image2.webp";
-import img3 from "../../assets/banner/image3.webp";
-import img4 from "../../assets/banner/image4.webp";
-import img5 from "../../assets/banner/image5.webp";
-import img6 from "../../assets/banner/image6.webp";
+import img1 from "../../../assets/banner/image1.webp";
+import img2 from "../../../assets/banner/image2.webp";
+import img3 from "../../../assets/banner/image3.webp";
+import img4 from "../../../assets/banner/image4.webp";
+import img5 from "../../../assets/banner/image5.webp";
+import img6 from "../../../assets/banner/image6.webp";
 
 const Banner = () => {
   const progressCircle = useRef(null);

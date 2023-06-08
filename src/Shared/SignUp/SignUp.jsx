@@ -6,7 +6,7 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 
 const SignUp = () => {
-  const { createUser, userProfileUpdate } = useAuth();
+  const { createUser, userProfileUpdate, loginWithGoogle } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
@@ -47,6 +47,29 @@ const SignUp = () => {
           console.log(error);
         });
     }
+  };
+
+  const handleLoginWithGoogle = () => {
+    loginWithGoogle()
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        axios
+          .put(`${import.meta.env.VITE_URL}/users/${user?.email}`, {
+            email: user?.email,
+            name: user?.displayName,
+            img: user?.photoURL,
+            date: new Date(),
+          })
+          .then((data) => {
+            console.log(data);
+            toast.success("successfully logged");
+            navigate(from, { replace: true });
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   return (
     <section className="w-full  bg-[#eee2de] p-2">
@@ -206,6 +229,7 @@ const SignUp = () => {
           </form>
           <div className="mt-3 space-y-3">
             <button
+              onClick={handleLoginWithGoogle}
               type="button"
               className="relative inline-flex w-full items-center justify-center rounded-md border border-gray-400 bg-white px-3.5 py-2.5 font-semibold text-gray-700 transition-all duration-200 hover:bg-gray-100 hover:text-black focus:bg-gray-100 focus:text-black focus:outline-none"
             >
