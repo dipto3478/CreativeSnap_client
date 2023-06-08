@@ -1,8 +1,16 @@
 import { ArrowRight } from "lucide-react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+import axios from "axios";
+import { toast } from "react-hot-toast";
 
 const SignUp = () => {
+  const { createUser, userProfileUpdate } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
+
   const {
     register,
     handleSubmit,
@@ -11,6 +19,34 @@ const SignUp = () => {
   } = useForm();
   const onSubmit = (data) => {
     console.log(data);
+    if (data.password === data.confirm_password) {
+      createUser(data.email, data.password)
+        .then((result) => {
+          const user = result.user;
+          console.log(user);
+          userProfileUpdate(data.name, data.photo)
+            .then(() => {
+              axios
+                .put(`${import.meta.env.VITE_URL}/users/${user?.email}`, {
+                  email: user?.email,
+                  name: user?.displayName,
+                  img: user?.photoURL,
+                  date: new Date(),
+                })
+                .then((data) => {
+                  console.log(data);
+                  toast.success("successfully signed in");
+                  navigate(from, { replace: true });
+                });
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   };
   return (
     <section className="w-full  bg-[#eee2de] p-2">

@@ -6,16 +6,14 @@ const Footer = () => {
       <div className="container relative z-10 mx-auto  px-4">
         <div className="-m-8 flex flex-wrap items-center justify-between">
           <div className="w-auto p-8">
-            <a href="#">
-              <div className="inline-flex items-center">
-                <Link
-                  to="/"
-                  className="font-bold text-xl border-4 border-black px-2 py-1  border-dotted "
-                >
-                  Creative Snap
-                </Link>
-              </div>
-            </a>
+            <div className="inline-flex items-center">
+              <Link
+                to="/"
+                className="font-bold text-xl border-4 border-black px-2 py-1  border-dotted "
+              >
+                Creative Snap
+              </Link>
+            </div>
           </div>
           <div className="w-auto p-8">
             <ul className="-m-5 flex flex-wrap items-center">

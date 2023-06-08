@@ -1,9 +1,31 @@
 import { ArrowRight } from "lucide-react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+import { toast } from "react-hot-toast";
 
 const Login = () => {
+  const { loginUser } = useAuth();
   const [show, setShow] = useState(true);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
+  const { register, handleSubmit } = useForm();
+  const onSubmit = (data) => {
+    console.log(data);
+    loginUser(data.email, data.password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        toast.success("successfully logged");
+        navigate(from, { replace: true });
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error(err.message);
+      });
+  };
   return (
     <section className=" w-full  bg-[#eee2de] p-2">
       <div className="flex items-center h-screen justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
@@ -28,7 +50,7 @@ const Login = () => {
               Create a free account
             </Link>
           </p>
-          <form action="#" method="POST" className="mt-8">
+          <form onSubmit={handleSubmit(onSubmit)} className="mt-8">
             <div className="space-y-5">
               <div>
                 <label
@@ -39,6 +61,7 @@ const Login = () => {
                 </label>
                 <div className="mt-2">
                   <input
+                    {...register("email")}
                     className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                     type="email"
                     placeholder="Email"
@@ -64,6 +87,7 @@ const Login = () => {
                 </div>
                 <div className="mt-2">
                   <input
+                    {...register("password")}
                     className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                     type={show ? "password" : "text"}
                     placeholder="Password"
@@ -72,7 +96,7 @@ const Login = () => {
               </div>
               <div>
                 <button
-                  type="button"
+                  type="submit"
                   className="inline-flex w-full items-center justify-center rounded-md bg-black px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80"
                 >
                   Login <ArrowRight className="ml-2" size={16} />
