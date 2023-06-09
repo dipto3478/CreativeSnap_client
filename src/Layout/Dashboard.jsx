@@ -3,7 +3,7 @@ import { Link, Outlet } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { toast } from "react-hot-toast";
 const Dashboard = () => {
-  const { logOut } = useAuth();
+  const { logOut, role } = useAuth();
 
   const handleLogOut = () => {
     logOut()
@@ -28,25 +28,29 @@ const Dashboard = () => {
             <div className="space-y-3  ">
               <Link
                 className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
-                to="/"
+                to="/dashboard/myprofile"
               >
                 <UserCircle className="h-5 w-5" aria-hidden="true" />
                 <span className="mx-2 text-sm font-medium">My Profile</span>
               </Link>
-              <Link
-                className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
-                to="/dashboard/allusers"
-              >
-                <Users className="h-5 w-5" aria-hidden="true" />
-                <span className="mx-2 text-sm font-medium">All Users</span>
-              </Link>
-              <Link
-                className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
-                to="/dashboard/addclasses"
-              >
-                <Users className="h-5 w-5" aria-hidden="true" />
-                <span className="mx-2 text-sm font-medium">Add Classes</span>
-              </Link>
+              {role === "admin" && (
+                <Link
+                  className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
+                  to="/dashboard/allusers"
+                >
+                  <Users className="h-5 w-5" aria-hidden="true" />
+                  <span className="mx-2 text-sm font-medium">All Users</span>
+                </Link>
+              )}
+              {role === "instructor" && (
+                <Link
+                  className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
+                  to="/dashboard/addclasses"
+                >
+                  <School className="h-5 w-5" aria-hidden="true" />
+                  <span className="mx-2 text-sm font-medium">Add Classes</span>
+                </Link>
+              )}
             </div>
             <hr className="border-2 border-black" />
             <div className="space-y-3 ">

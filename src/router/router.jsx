@@ -9,6 +9,8 @@ import Home from "../pages/Home/Home/Home";
 import AllUsers from "../pages/Dashboard/AllUsers";
 import AddClasses from "../pages/Dashboard/AddClasses";
 import AllClasses from "../pages/Classes/AllClasses";
+import MyProfile from "../pages/Dashboard/MyProfile";
+import AllInstructors from "../pages/Instructors/AllInstructors";
 
 export const router = createBrowserRouter([
   {
@@ -23,6 +25,10 @@ export const router = createBrowserRouter([
       {
         path: "/classes",
         element: <AllClasses />,
+      },
+      {
+        path: "/instructors",
+        element: <AllInstructors />,
       },
     ],
   },
@@ -50,6 +56,10 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/addclasses",
         element: <AddClasses />,
+      },
+      {
+        path: "/dashboard/myprofile",
+        element: <MyProfile />,
       },
     ],
   },

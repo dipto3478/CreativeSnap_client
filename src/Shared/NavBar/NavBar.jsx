@@ -5,7 +5,7 @@ import useAuth from "../../hooks/useAuth";
 import { toast } from "react-hot-toast";
 
 const NavBar = () => {
-  const { user, logOut } = useAuth();
+  const { user, logOut, role } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const nav = (
@@ -38,7 +38,7 @@ const NavBar = () => {
         <li>
           <Link
             className="inline-flex items-center text-sm font-semibold text-gray-800 hover:text-gray-900"
-            to="/dashboard"
+            to={`/dashboard${role ? "/myprofile" : ""}`}
           >
             Dashboard
           </Link>
