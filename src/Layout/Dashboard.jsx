@@ -1,9 +1,22 @@
-import { Home, School, LogOut, UserCircle, Users } from "lucide-react";
+import { Home, LogOut, School, UserCircle, Users } from "lucide-react";
 import { Link, Outlet } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
+import { toast } from "react-hot-toast";
 const Dashboard = () => {
+  const { logOut } = useAuth();
+
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {
+        toast.success("successfully logged");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
-    <>
-      <aside className="flex h-screen w-64 flex-col overflow-y-auto  bg-[#EEE2DE] px-5 py-8 border-r-2  border-black">
+    <div className="flex w-full ">
+      <aside className="flex h-screen  w-1/5    flex-col overflow-y-auto  bg-[#EEE2DE] px-5 py-8 border-r-2  border-black">
         <Link
           to="/"
           className="font-bold text-xl text-center border-4 border-black px-2 py-1  border-dotted "
@@ -22,10 +35,17 @@ const Dashboard = () => {
               </Link>
               <Link
                 className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
-                to="/"
+                to="/dashboard/allusers"
               >
                 <Users className="h-5 w-5" aria-hidden="true" />
                 <span className="mx-2 text-sm font-medium">All Users</span>
+              </Link>
+              <Link
+                className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
+                to="/dashboard/addclasses"
+              >
+                <Users className="h-5 w-5" aria-hidden="true" />
+                <span className="mx-2 text-sm font-medium">Add Classes</span>
               </Link>
             </div>
             <hr className="border-2 border-black" />
@@ -55,6 +75,7 @@ const Dashboard = () => {
             <hr className="border-2 border-black" />
             <div className="space-y-3  mt-auto">
               <p
+                onClick={handleLogOut}
                 className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
                 href="#"
               >
@@ -65,10 +86,10 @@ const Dashboard = () => {
           </nav>
         </div>
       </aside>
-      <section>
+      <section className=" flex flex-col items-center justify-center w-full">
         <Outlet />
       </section>
-    </>
+    </div>
   );
 };
 

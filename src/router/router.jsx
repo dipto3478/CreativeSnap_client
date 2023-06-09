@@ -6,6 +6,8 @@ import SignUp from "../Shared/SignUp/SignUp";
 import Dashboard from "../Layout/Dashboard";
 import PrivateRouter from "./PrivateRouter";
 import Home from "../pages/Home/Home/Home";
+import AllUsers from "../pages/Dashboard/AllUsers";
+import AddClasses from "../pages/Dashboard/AddClasses";
 
 export const router = createBrowserRouter([
   {
@@ -35,5 +37,15 @@ export const router = createBrowserRouter([
         <Dashboard />
       </PrivateRouter>
     ),
+    children: [
+      {
+        path: "/dashboard/allusers",
+        element: <AllUsers />,
+      },
+      {
+        path: "/dashboard/addclasses",
+        element: <AddClasses />,
+      },
+    ],
   },
 ]);
