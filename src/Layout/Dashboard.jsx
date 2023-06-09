@@ -16,7 +16,7 @@ const Dashboard = () => {
   };
   return (
     <div className="flex w-full ">
-      <aside className="flex h-screen  w-1/5    flex-col overflow-y-auto  bg-[#EEE2DE] px-5 py-8 border-r-2  border-black">
+      <aside className="flex h-screen fixed w-1/5    flex-col overflow-y-auto  bg-[#EEE2DE] px-5 py-8 border-r-2  border-black">
         <Link
           to="/"
           className="font-bold text-xl text-center border-4 border-black px-2 py-1  border-dotted "
@@ -32,6 +32,13 @@ const Dashboard = () => {
               >
                 <UserCircle className="h-5 w-5" aria-hidden="true" />
                 <span className="mx-2 text-sm font-medium">My Profile</span>
+              </Link>
+              <Link
+                className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
+                to="/dashboard/myclasses"
+              >
+                <School className="h-5 w-5" aria-hidden="true" />
+                <span className="mx-2 text-sm font-medium">My Classes</span>
               </Link>
               {role === "admin" && (
                 <Link

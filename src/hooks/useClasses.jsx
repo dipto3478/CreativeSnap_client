@@ -3,14 +3,15 @@ import useAuth from "./useAuth";
 import useAxios from "./useAxios";
 
 const useClasses = () => {
-  const { loading } = useAuth();
+  const { loading, setIsLoader } = useAuth();
   const [axiosSource] = useAxios();
   const { data: classes = [], refetch } = useQuery({
     queryKey: ["classes"],
     enabled: !loading,
     queryFn: async () => {
       const res = await axiosSource("/classes");
-      console.log(res.data);
+      // console.log(res.data);
+      setIsLoader(false);
       return res.data;
     },
   });

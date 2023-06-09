@@ -1,4 +1,4 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -100,22 +100,21 @@ const Login = () => {
                   >
                     Password
                   </label>
-                  {/* TODO: unHide icons */}
-                  <a
-                    onClick={() => setShow(!show)}
-                    title=""
-                    className="text-sm cursor-pointer font-semibold text-black hover:underline"
-                  >
-                    {show ? "Show password?" : "Hide password?"}
-                  </a>
                 </div>
-                <div className="mt-2">
+                <div className="mt-2 relative">
                   <input
                     {...register("password")}
-                    className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
+                    className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50 "
                     type={show ? "password" : "text"}
                     placeholder="Password"
                   ></input>
+                  <span
+                    onClick={() => setShow(!show)}
+                    title=""
+                    className="text-sm absolute top-2 right-2   cursor-pointer font-semibold text-black hover:underline"
+                  >
+                    {show ? <Eye /> : <EyeOff />}
+                  </span>
                 </div>
               </div>
               <div>

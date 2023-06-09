@@ -38,7 +38,11 @@ const NavBar = () => {
         <li>
           <Link
             className="inline-flex items-center text-sm font-semibold text-gray-800 hover:text-gray-900"
-            to={`/dashboard${role ? "/myprofile" : ""}`}
+            to={`/dashboard${
+              role === "admin" || role === "instructor"
+                ? "/myprofile"
+                : "/myclasses"
+            }`}
           >
             Dashboard
           </Link>

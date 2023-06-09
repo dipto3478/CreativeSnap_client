@@ -11,6 +11,7 @@ import AddClasses from "../pages/Dashboard/AddClasses";
 import AllClasses from "../pages/Classes/AllClasses";
 import MyProfile from "../pages/Dashboard/MyProfile";
 import AllInstructors from "../pages/Instructors/AllInstructors";
+import MyClasses from "../pages/Dashboard/MyClasses";
 
 export const router = createBrowserRouter([
   {
@@ -60,6 +61,10 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/myprofile",
         element: <MyProfile />,
+      },
+      {
+        path: "/dashboard/myclasses",
+        element: <MyClasses />,
       },
     ],
   },

@@ -3,7 +3,7 @@ import useAxios from "./useAxios";
 import useAuth from "./useAuth";
 
 const useUser = () => {
-  const { loading } = useAuth();
+  const { loading, setIsLoader } = useAuth();
   const [axiosSource] = useAxios();
   const { data: users = [], refetch } = useQuery({
     queryKey: ["users"],
@@ -11,6 +11,7 @@ const useUser = () => {
     queryFn: async () => {
       const res = await axiosSource("/users");
       // console.log(res.data);
+      setIsLoader(false);
       return res.data;
     },
   });
