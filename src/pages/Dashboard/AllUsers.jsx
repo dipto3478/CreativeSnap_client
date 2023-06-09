@@ -16,9 +16,25 @@ const AllUsers = () => {
         toast.success("Successfully make Admin");
       });
   };
+
+  const handleMakeInstructor = (user) => {
+    axios
+      .patch(`${import.meta.env.VITE_URL}/users/instructor/${user?._id}`)
+      .then((data) => {
+        refetch();
+        console.log(data);
+        toast.success("Successfully make Instructor");
+      });
+  };
   // TODO: remove
-  const handleRemove = (id) => {
-    console.log(id);
+  const handleRemove = (user) => {
+    axios
+      .delete(`${import.meta.env.VITE_URL}/users/${user?._id}`)
+      .then((data) => {
+        refetch();
+        console.log(data);
+        toast.success("Successfully User remove");
+      });
   };
   return (
     <div className="w-full px-5 overflow flex flex-col">
@@ -76,16 +92,27 @@ const AllUsers = () => {
                     </td>
 
                     <td className="whitespace-nowrap px-4 py-4 text-sm text-gray-700">
-                      <button
-                        className="rounded-md border border-black px-3 py-2 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-                        onClick={() => handleMakeAdmin(person)}
-                      >
-                        {person?.role ? "Admin" : "Make Admin"}
-                      </button>
+                      {person?.role && (
+                        <button
+                          disabled={person?.role}
+                          className="rounded-md border border-black px-3 py-2 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                          onClick={() => handleMakeAdmin(person)}
+                        >
+                          <span className="uppercase">{person?.role}</span>
+                        </button>
+                      )}
+                      {!person?.role && (
+                        <button
+                          className="rounded-md border border-black px-3 py-2 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                          onClick={() => handleMakeInstructor(person)}
+                        >
+                          Make Instructor
+                        </button>
+                      )}
                     </td>
                     <td className="whitespace-nowrap px-4 py-4 text-right text-sm font-medium">
                       <button
-                        onClick={() => handleRemove(person?._id)}
+                        onClick={() => handleRemove(person)}
                         type="button"
                         className="rounded-full bg-red-500 px-3 py-3 text-sm font-semibold text-white shadow-sm hover:bg-red/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red"
                       >

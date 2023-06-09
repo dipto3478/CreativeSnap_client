@@ -8,7 +8,7 @@ const Dashboard = () => {
   const handleLogOut = () => {
     logOut()
       .then(() => {
-        toast.success("successfully logged");
+        toast.success("successfully log out");
       })
       .catch((err) => {
         console.log(err);

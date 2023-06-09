@@ -104,7 +104,7 @@ const Login = () => {
                   <a
                     onClick={() => setShow(!show)}
                     title=""
-                    className="text-sm font-semibold text-black hover:underline"
+                    className="text-sm cursor-pointer font-semibold text-black hover:underline"
                   >
                     {show ? "Show password?" : "Hide password?"}
                   </a>

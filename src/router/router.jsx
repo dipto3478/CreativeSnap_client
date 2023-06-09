@@ -8,6 +8,7 @@ import PrivateRouter from "./PrivateRouter";
 import Home from "../pages/Home/Home/Home";
 import AllUsers from "../pages/Dashboard/AllUsers";
 import AddClasses from "../pages/Dashboard/AddClasses";
+import AllClasses from "../pages/Classes/AllClasses";
 
 export const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/classes",
+        element: <AllClasses />,
       },
     ],
   },

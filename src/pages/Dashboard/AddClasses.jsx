@@ -25,13 +25,15 @@ const AddClasses = () => {
       .then((imgResponse) => {
         if (imgResponse.success) {
           const imgUrl = imgResponse.data.display_url;
-          const { name, email, price, seats } = data;
+          const { name, email, price, seats, title } = data;
           const AllData = {
-            Instructor_name: name,
+            instructor_name: name,
             email,
             price: parseFloat(price),
             Available_seats: parseFloat(seats),
             image: imgUrl,
+            instructor_img: user?.photoURL,
+            title,
           };
           axiosSource.post("/classes", AllData).then((data) => {
             console.log(data);
@@ -139,12 +141,13 @@ const AddClasses = () => {
               className="flex h-10 w-full rounded-md border border-black/30 bg-transparent px-3 py-2 text-sm placeholder:text-gray-600 focus:outline-none focus:ring-1 focus:ring-black/30 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
               type="text"
               id="title"
+              placeholder="Enter title"
             ></input>
           </div>
         </div>
         <div className="mt-5">
           <input
-            className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+            className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black cursor-pointer"
             type="submit"
             value="Add Class"
           />
