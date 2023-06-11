@@ -39,8 +39,10 @@ const Banner = () => {
         <SwiperSlide>
           <img src={img1} alt="" />
           <div className="text-[#eee2de] absolute bg-black opacity-25 w-full h-full flex flex-col items-center justify-center">
-            <h1 className="text-5xl z-10  ">PHOTOGRAPHY & VIDEO CLASSES</h1>
-            <p className="text-lg ">
+            <h1 className=" text-3xl md:text-5xl ">
+              PHOTOGRAPHY & VIDEO CLASSES
+            </h1>
+            <p className="text-sm md:text-lg">
               Become the photographer you've always wanted. Today's greats will
               show you how.
             </p>
@@ -49,8 +51,10 @@ const Banner = () => {
         <SwiperSlide>
           <img src={img2} alt="" />
           <div className=" text-[#eee2de] absolute bg-black opacity-25 w-full h-full flex flex-col items-center justify-center">
-            <h1 className="text-5xl ">PHOTOGRAPHY & VIDEO CLASSES</h1>
-            <p className="text-lg">
+            <h1 className=" text-3xl md:text-5xl ">
+              PHOTOGRAPHY & VIDEO CLASSES
+            </h1>
+            <p className="text-sm md:text-lg">
               Become the photographer you've always wanted. Today's greats will
               show you how.
             </p>
@@ -59,8 +63,10 @@ const Banner = () => {
         <SwiperSlide>
           <img src={img3} alt="" />
           <div className=" text-[#eee2de] absolute bg-black opacity-25 w-full h-full flex flex-col items-center justify-center">
-            <h1 className="text-5xl ">PHOTOGRAPHY & VIDEO CLASSES</h1>
-            <p className="text-lg">
+            <h1 className=" text-3xl md:text-5xl ">
+              PHOTOGRAPHY & VIDEO CLASSES
+            </h1>
+            <p className="text-sm md:text-lg">
               Become the photographer you've always wanted. Today's greats will
               show you how.
             </p>
@@ -69,8 +75,10 @@ const Banner = () => {
         <SwiperSlide>
           <img src={img4} alt="" />
           <div className=" text-[#eee2de] absolute bg-black opacity-25 w-full h-full flex flex-col items-center justify-center">
-            <h1 className="text-5xl ">PHOTOGRAPHY & VIDEO CLASSES</h1>
-            <p className="text-lg">
+            <h1 className=" text-3xl md:text-5xl ">
+              PHOTOGRAPHY & VIDEO CLASSES
+            </h1>
+            <p className="text-sm md:text-lg">
               Become the photographer you've always wanted. Today's greats will
               show you how.
             </p>
@@ -79,8 +87,10 @@ const Banner = () => {
         <SwiperSlide>
           <img src={img5} alt="" />
           <div className=" text-[#eee2de] absolute bg-black opacity-25 w-full h-full flex flex-col items-center justify-center">
-            <h1 className="text-5xl ">PHOTOGRAPHY & VIDEO CLASSES</h1>
-            <p className="text-lg">
+            <h1 className=" text-3xl md:text-5xl ">
+              PHOTOGRAPHY & VIDEO CLASSES
+            </h1>
+            <p className="text-sm md:text-lg">
               Become the photographer you've always wanted. Today's greats will
               show you how.
             </p>
@@ -89,8 +99,10 @@ const Banner = () => {
         <SwiperSlide>
           <img src={img6} alt="" />
           <div className=" text-[#eee2de] absolute bg-black opacity-25 w-full h-full flex flex-col items-center justify-center">
-            <h1 className="text-5xl ">PHOTOGRAPHY & VIDEO CLASSES</h1>
-            <p className="text-lg">
+            <h1 className=" text-3xl md:text-5xl ">
+              PHOTOGRAPHY & VIDEO CLASSES
+            </h1>
+            <p className="text-sm md:text-lg">
               Become the photographer you've always wanted. Today's greats will
               show you how.
             </p>

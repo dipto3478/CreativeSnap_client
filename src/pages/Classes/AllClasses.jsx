@@ -80,7 +80,11 @@ const AllClasses = () => {
                       <>
                         <button
                           onClick={() => handleAddToCard(card)}
-                          disabled={role === "admin" || role === "instructor"}
+                          disabled={
+                            role === "admin" ||
+                            role === "instructor" ||
+                            card?.Available_seats === 0
+                          }
                           type="button"
                           className={`mt-4 rounded-sm  ${
                             role === "admin" || role === "instructor"

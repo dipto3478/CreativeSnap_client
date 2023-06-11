@@ -14,7 +14,7 @@ const AllInstructors = () => {
         </>
       ) : (
         <>
-          <section className="grid grid-cols-1 justify-center md:grid-cols-2 lg:grid-cols-4 gap-5 p-5">
+          <section className="grid grid-cols-1 justify-center md:grid-cols-2 lg:grid-cols-3 place-items-center gap-5 p-5">
             {instructors.map((instructor) => (
               <div
                 key={instructor?._id}
