@@ -3,7 +3,7 @@ import useAuth from "../../../hooks/useAuth";
 import useAxios from "../../../hooks/useAxios";
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
-import { Rotate } from "react-awesome-reveal";
+import { Bounce } from "react-awesome-reveal";
 
 const PopularClasses = () => {
   const { role, user, loading } = useAuth();
@@ -55,7 +55,7 @@ const PopularClasses = () => {
 
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 p-5">
         {classes.map((card) => (
-          <Rotate key={card?._id} delay={500}>
+          <Bounce key={card?._id} delay={500}>
             <div className="w-full  rounded-md border">
               <img
                 src={card?.image}
@@ -116,7 +116,7 @@ const PopularClasses = () => {
                 </div>
               </div>
             </div>
-          </Rotate>
+          </Bounce>
         ))}
       </section>
     </div>
