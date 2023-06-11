@@ -45,7 +45,7 @@ const AddClasses = () => {
   };
 
   return (
-    <section className="w-full px-5">
+    <section className=" flex flex-col items-center justify-center h-screen  px-5">
       <h2 className="text-3xl text-center font-bold">Add Classes</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex  gap-5">

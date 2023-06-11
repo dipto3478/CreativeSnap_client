@@ -1,15 +1,21 @@
 import { Trash } from "lucide-react";
 import useSelectedClasses from "../../hooks/useSelectedClasses";
 import { Link } from "react-router-dom";
+import useAxios from "../../hooks/useAxios";
+import { toast } from "react-hot-toast";
 
 const MyClasses = () => {
-  const [selected] = useSelectedClasses();
-  console.log(selected);
-
-  const totalPrice = selected.reduce((acc, item) => acc + item?.price, 0);
+  const [selected, refetch] = useSelectedClasses();
+  // console.log(selected);
+  const [axiosSource] = useAxios();
 
   const handleRemove = (product) => {
-    console.log(product);
+    // console.log(product);
+    axiosSource.delete(`/cards/${product?._id}`).then((data) => {
+      refetch();
+      console.log(data);
+      toast.success("Successfully deleted");
+    });
   };
   return (
     <div className="mx-auto flex max-w-3xl flex-col space-y-4 p-6 px-2 sm:p-10 sm:px-2">
@@ -37,7 +43,7 @@ const MyClasses = () => {
                     <p className="text-lg font-semibold">${product?.price}</p>
                   </div>
                 </div>
-                <div className="flex divide-x text-sm">
+                <div className="flex justify-between divide-x text-sm">
                   <button
                     onClick={() => handleRemove(product)}
                     type="button"
@@ -46,33 +52,19 @@ const MyClasses = () => {
                     <Trash size={16} />
                     <span>Remove</span>
                   </button>
+                  <Link
+                    to={`/dashboard/payment/${product?._id}`}
+                    type="button"
+                    className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                  >
+                    Pay
+                  </Link>
                 </div>
               </div>
             </div>
           </li>
         ))}
       </ul>
-      <div className="space-y-1 text-right">
-        <p>
-          Total amount:
-          <span className="font-semibold"> ${totalPrice}</span>
-        </p>
-      </div>
-      <div className="flex justify-end space-x-4">
-        <Link
-          to="/classes"
-          type="button"
-          className="rounded-md border border-black px-3 py-2 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-        >
-          Back to shop
-        </Link>
-        <button
-          type="button"
-          className="rounded-md border border-black px-3 py-2 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-        >
-          Checkout
-        </button>
-      </div>
     </div>
   );
 };

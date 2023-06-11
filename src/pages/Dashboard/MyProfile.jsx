@@ -3,7 +3,7 @@ import useAuth from "../../hooks/useAuth";
 const MyProfile = () => {
   const { user } = useAuth();
   return (
-    <div className="space-y-3">
+    <div className="space-y-3 flex flex-col items-center justify-center h-screen">
       <img
         className="w-[300px] border-2 border-black"
         src={user?.photoURL}
