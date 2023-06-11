@@ -17,6 +17,16 @@ const MyClasses = () => {
       toast.success("Successfully deleted");
     });
   };
+
+  if (!selected || selected.length === 0) {
+    return (
+      <div>
+        <h3 className="text-5xl text-red-500 font-bold">
+          No Class Enroll !!!!
+        </h3>
+      </div>
+    );
+  }
   return (
     <div className="mx-auto flex max-w-3xl flex-col space-y-4 p-6 px-2 sm:p-10 sm:px-2">
       <ul className="flex flex-col divide-y divide-gray-200">
@@ -38,6 +48,9 @@ const MyClasses = () => {
                       {product?.title}
                     </h3>
                     <p className="text-sm">By {product?.instructor_name}</p>
+                    <p className="text-sm">
+                      Available_seats: {product?.Available_seats}
+                    </p>
                   </div>
                   <div className="text-right">
                     <p className="text-lg font-semibold">${product?.price}</p>

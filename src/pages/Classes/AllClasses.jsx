@@ -3,6 +3,7 @@ import Loading from "../../Shared/Loading/Loading";
 import useAuth from "../../hooks/useAuth";
 import useAxios from "../../hooks/useAxios";
 import useClasses from "../../hooks/useClasses";
+import { Link } from "react-router-dom";
 
 const AllClasses = () => {
   const { role, isLoader, user } = useAuth();
@@ -59,29 +60,49 @@ const AllClasses = () => {
                 />
                 <div className="p-4">
                   <h1 className="text-lg font-semibold">{card?.title}</h1>
-                  <div className="flex items-center justify-end space-y-2 gap-2">
-                    <p className="mt-3 text-sm text-gray-600">
-                      by {card?.instructor_name}
-                    </p>
-                    <img
-                      className=" h-8 w-8 rounded-full"
-                      src={card?.instructor_img}
-                      alt={card?.instructor_name}
-                    />
+                  <div className="flex items-center  justify-between space-y-2 gap-2">
+                    <p>Enroll by: {card?.sell_count} students</p>
+                    <div>
+                      <p className="mt-3 text-sm text-gray-600">
+                        by {card?.instructor_name}
+                      </p>
+                      <img
+                        className=" h-8 w-8 rounded-full"
+                        src={card?.instructor_img}
+                        alt={card?.instructor_name}
+                      />
+                    </div>
                   </div>
                   <div className="flex items-center  justify-between">
-                    <button
-                      onClick={() => handleAddToCard(card)}
-                      disabled={role === "admin" || role === "instructor"}
-                      type="button"
-                      className={`mt-4 rounded-sm  ${
-                        role === "admin" || role === "instructor"
-                          ? "bg-red-500"
-                          : "bg-black"
-                      }  px-3 py-2 text-[14px] font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black`}
-                    >
-                      Enroll Now
-                    </button>
+                    {user?.email ||
+                    role === "admin" ||
+                    role === "instructor" ? (
+                      <>
+                        <button
+                          onClick={() => handleAddToCard(card)}
+                          disabled={role === "admin" || role === "instructor"}
+                          type="button"
+                          className={`mt-4 rounded-sm  ${
+                            role === "admin" || role === "instructor"
+                              ? "bg-red-500"
+                              : "bg-black"
+                          }  px-3 py-2 text-[14px] font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black`}
+                        >
+                          Enroll Now
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <Link
+                          to="/login"
+                          type="button"
+                          className={`mt-4 rounded-sm bg-black px-3 py-2 text-[14px] font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black`}
+                        >
+                          Enroll Now
+                        </Link>
+                      </>
+                    )}
+
                     <p className="font-bold">
                       Available seats: {card?.Available_seats}
                     </p>

@@ -1,19 +1,10 @@
-import { Home, LogOut, School, UserCircle, Users } from "lucide-react";
+import { CreditCard, Home, School, UserCircle, Users } from "lucide-react";
 import { Link, Outlet } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
-import { toast } from "react-hot-toast";
-const Dashboard = () => {
-  const { logOut, role } = useAuth();
 
-  const handleLogOut = () => {
-    logOut()
-      .then(() => {
-        toast.success("successfully log out");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+const Dashboard = () => {
+  const { role, user } = useAuth();
+
   return (
     <div className="flex w-full bg-[#EEE2DE]  ">
       <aside className="flex  h-screen    w-1/5    flex-col uto  px-5 py-8 ">
@@ -33,15 +24,26 @@ const Dashboard = () => {
                 <UserCircle className="h-5 w-5" aria-hidden="true" />
                 <span className="mx-2 text-sm font-medium">My Profile</span>
               </Link>
-              {!role === "admin" || !role === "instructor" || (
-                <Link
-                  className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
-                  to="/dashboard/myclasses"
-                >
-                  <School className="h-5 w-5" aria-hidden="true" />
-                  <span className="mx-2 text-sm font-medium">My Classes</span>
-                </Link>
-              )}
+              <Link
+                className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
+                to="/dashboard/history"
+              >
+                <CreditCard className="h-5 w-5" aria-hidden="true" />
+                <span className="mx-2 text-sm font-medium">
+                  Payment History
+                </span>
+              </Link>
+              {!role === "admin" ||
+                !role === "instructor" ||
+                (user?.email && (
+                  <Link
+                    className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
+                    to="/dashboard/myclasses"
+                  >
+                    <School className="h-5 w-5" aria-hidden="true" />
+                    <span className="mx-2 text-sm font-medium">My Classes</span>
+                  </Link>
+                ))}
               {role === "admin" && (
                 <Link
                   className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
@@ -84,17 +86,6 @@ const Dashboard = () => {
                 <School className="h-5 w-5" aria-hidden="true" />
                 <span className="mx-2 text-sm font-medium">Classes</span>
               </Link>
-            </div>
-            <hr className="border-2 border-black" />
-            <div className="space-y-3  mt-auto">
-              <p
-                onClick={handleLogOut}
-                className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
-                href="#"
-              >
-                <LogOut className="h-5 w-5" aria-hidden="true" />
-                <span className="mx-2 text-sm font-medium">Log Out</span>
-              </p>
             </div>
           </nav>
         </div>

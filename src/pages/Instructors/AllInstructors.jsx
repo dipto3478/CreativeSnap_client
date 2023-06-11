@@ -32,9 +32,12 @@ const AllInstructors = () => {
                   <p className="mt-2 text-sm uppercase text-gray-300">
                     {instructor?.role}
                   </p>
-                  <button className="mt-2 inline-flex cursor-pointer items-center text-sm font-semibold text-white">
-                    View Profile &rarr;
-                  </button>
+                  <p className="mt-2 text-sm uppercase text-gray-300">
+                    Email: {instructor?.email}
+                  </p>
+                  <p className="mt-2 text-sm uppercase text-gray-300">
+                    Enroll by: {instructor?.sell_count} Students
+                  </p>
                 </div>
               </div>
             ))}

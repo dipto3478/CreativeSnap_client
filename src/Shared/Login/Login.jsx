@@ -14,11 +14,11 @@ const Login = () => {
   const from = location.state?.from?.pathname || "/";
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
     loginUser(data.email, data.password)
       .then((result) => {
         const user = result.user;
-        console.log(user);
+        // console.log(user);
         toast.success("successfully logged");
         navigate(from, { replace: true });
       })

@@ -14,6 +14,7 @@ import AllInstructors from "../pages/Instructors/AllInstructors";
 import MyClasses from "../pages/Dashboard/MyClasses";
 import Payment from "../pages/Dashboard/Payment/Payment";
 import axios from "axios";
+import PaymentHistory from "../pages/Dashboard/PaymentHistory";
 
 export const router = createBrowserRouter([
   {
@@ -71,6 +72,10 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/payment/:id",
         element: <Payment />,
+      },
+      {
+        path: "/dashboard/history",
+        element: <PaymentHistory />,
       },
     ],
   },

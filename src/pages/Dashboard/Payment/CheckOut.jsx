@@ -5,6 +5,7 @@ import useAxios from "../../../hooks/useAxios";
 import useAuth from "../../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
+import moment from "moment/moment";
 
 const CheckOut = ({ price, item }) => {
   const stripe = useStripe();
@@ -72,17 +73,22 @@ const CheckOut = ({ price, item }) => {
     setProcess(false);
 
     if (paymentIntent.status === "succeeded") {
+      const date = new Date();
+      const formattedDate = moment(date).format("MMMM Do, YYYY, h:mm:ss A");
+      // console.log(formattedDate);
       const txnId = paymentIntent.id;
       setTxnId(txnId);
       const payment = {
         email: user?.email,
         price,
+        date: formattedDate,
         class_Id: item?.class_Id,
         title: item?.title,
         instructor_email: item?.instructor_email,
         instructor_img: item?.instructor_img,
         instructor_name: item?.instructor_name,
         itemId: item?._id,
+        Available_seats: item?.Available_seats,
       };
       axiosSource.post("/payment", payment).then((res) => {
         navigate("/dashboard/myclasses");
