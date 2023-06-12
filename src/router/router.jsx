@@ -15,6 +15,7 @@ import MyClasses from "../pages/Dashboard/MyClasses";
 import Payment from "../pages/Dashboard/Payment/Payment";
 import axios from "axios";
 import PaymentHistory from "../pages/Dashboard/PaymentHistory";
+import ClassesStatus from "../pages/Dashboard/ClassesStatus";
 
 export const router = createBrowserRouter([
   {
@@ -76,6 +77,10 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/history",
         element: <PaymentHistory />,
+      },
+      {
+        path: "/dashboard/allclasses",
+        element: <ClassesStatus />,
       },
     ],
   },

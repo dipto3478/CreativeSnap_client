@@ -3,7 +3,7 @@ import { Link, Outlet } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 
 const Dashboard = () => {
-  const { role, user } = useAuth();
+  const { role } = useAuth();
 
   return (
     <div className="flex w-full bg-[#EEE2DE]  ">
@@ -24,26 +24,26 @@ const Dashboard = () => {
                 <UserCircle className="h-5 w-5" aria-hidden="true" />
                 <span className="mx-2 text-sm font-medium">My Profile</span>
               </Link>
-              <Link
-                className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
-                to="/dashboard/history"
-              >
-                <CreditCard className="h-5 w-5" aria-hidden="true" />
-                <span className="mx-2 text-sm font-medium">
-                  Payment History
-                </span>
-              </Link>
-              {!role === "admin" ||
-                !role === "instructor" ||
-                (user?.email && (
-                  <Link
-                    className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
-                    to="/dashboard/myclasses"
-                  >
-                    <School className="h-5 w-5" aria-hidden="true" />
-                    <span className="mx-2 text-sm font-medium">My Classes</span>
-                  </Link>
-                ))}
+              {!role && (
+                <Link
+                  className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
+                  to="/dashboard/history"
+                >
+                  <CreditCard className="h-5 w-5" aria-hidden="true" />
+                  <span className="mx-2 text-sm font-medium">
+                    Payment History
+                  </span>
+                </Link>
+              )}
+              {!role && (
+                <Link
+                  className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
+                  to="/dashboard/myclasses"
+                >
+                  <School className="h-5 w-5" aria-hidden="true" />
+                  <span className="mx-2 text-sm font-medium">My Classes</span>
+                </Link>
+              )}
               {role === "admin" && (
                 <Link
                   className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
@@ -51,6 +51,15 @@ const Dashboard = () => {
                 >
                   <Users className="h-5 w-5" aria-hidden="true" />
                   <span className="mx-2 text-sm font-medium">All Users</span>
+                </Link>
+              )}
+              {role === "admin" && (
+                <Link
+                  className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
+                  to="/dashboard/allclasses"
+                >
+                  <Users className="h-5 w-5" aria-hidden="true" />
+                  <span className="mx-2 text-sm font-medium">All Classes</span>
                 </Link>
               )}
               {role === "instructor" && (
@@ -90,7 +99,7 @@ const Dashboard = () => {
           </nav>
         </div>
       </aside>
-      <section className=" flex flex-col bg-white items-center justify-center overflow-y-scroll  w-4/5">
+      <section className=" flex flex-col bg-white items-center justify-center   w-4/5">
         <Outlet />
       </section>
     </div>

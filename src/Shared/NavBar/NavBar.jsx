@@ -3,10 +3,13 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { toast } from "react-hot-toast";
+import { useContext } from "react";
+import { DarkModeContext } from "../DarkModeProvider/DarkModeProvider";
 
 const NavBar = () => {
   const { user, logOut, role } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { isDarkMode, toggleDarkMode } = useContext(DarkModeContext);
 
   const nav = (
     <>
@@ -83,8 +86,17 @@ const NavBar = () => {
           <>
             <div className="flex grow justify-end">
               <button
+                onClick={toggleDarkMode}
+                type="button"
+                className={`rounded-md mr-2 ${
+                  isDarkMode ? " bg-white text-black" : "bg-black text-white"
+                }  px-3 py-2 text-sm font-semibold  shadow-sm  `}
+              >
+                {isDarkMode ? "Light" : "Dark"}
+              </button>
+              <button
                 onClick={handleLogOut}
-                className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                className="rounded-md  bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
               >
                 Log Out
               </button>
@@ -103,6 +115,15 @@ const NavBar = () => {
         ) : (
           <>
             <div className="flex grow justify-end">
+              <button
+                onClick={toggleDarkMode}
+                type="button"
+                className={`rounded-md mr-2 ${
+                  isDarkMode ? " bg-white text-black" : "bg-black text-white"
+                }  px-3 py-2 text-sm font-semibold  shadow-sm  `}
+              >
+                {isDarkMode ? "Light" : "Dark"}
+              </button>
               <Link
                 className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
                 to="/login"

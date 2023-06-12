@@ -9,7 +9,7 @@ const AllUsers = () => {
   const [users, refetch] = useUser();
   const { isLoading } = useAuth();
 
-  console.log(users);
+  // console.log(users);
   const handleMakeAdmin = (user) => {
     axios
       .patch(`${import.meta.env.VITE_URL}/users/admin/${user?._id}`)
@@ -47,10 +47,10 @@ const AllUsers = () => {
         </>
       ) : (
         <>
-          <div className="w-full px-5 overflow flex flex-col">
-            <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div className="w-full px-5  flex flex-col">
+            <div className="-mx-4 -my-2  sm:-mx-6 lg:-mx-8">
               <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-                <div className="overflow-hidden border border-gray-200 md:rounded-lg">
+                <div className=" border border-gray-200 md:rounded-lg">
                   <table className="min-w-full divide-y divide-gray-200">
                     <thead className="bg-gray-50">
                       <tr>
@@ -103,8 +103,12 @@ const AllUsers = () => {
 
                           <td className="whitespace-nowrap px-4 py-4 text-sm text-gray-700">
                             <button
-                              disabled={person?.role}
-                              className="rounded-md border border-black px-3 py-2 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                              disabled={person?.role === "admin"}
+                              className={`rounded-md border ${
+                                person?.role === "admin"
+                                  ? "bg-green-500 "
+                                  : "bg-red-500 "
+                              }  px-3 py-2 text-white text-sm font-semibold  shadow-sm `}
                               onClick={() => handleMakeAdmin(person)}
                             >
                               <span className="uppercase">
@@ -115,7 +119,12 @@ const AllUsers = () => {
                             </button>
 
                             <button
-                              className="rounded-md border border-black px-3 py-2 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                              disabled={person?.role === "instructor"}
+                              className={`rounded-md border ${
+                                person?.role === "instructor"
+                                  ? "bg-green-500 "
+                                  : "bg-red-500 "
+                              }  px-3 py-2 text-white text-sm font-semibold  shadow-sm `}
                               onClick={() => handleMakeInstructor(person)}
                             >
                               <span className="uppercase">

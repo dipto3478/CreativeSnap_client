@@ -52,7 +52,14 @@ const AllClasses = () => {
         <>
           <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 p-5">
             {classes.map((card) => (
-              <div key={card?._id} className="w-full  rounded-md border">
+              <div
+                key={card?._id}
+                className={`w-full ${
+                  role === "admin" || role === "instructor"
+                    ? "bg-red-500 text-white"
+                    : ""
+                }    rounded-md border`}
+              >
                 <img
                   src={card?.image}
                   alt="Laptop"
@@ -62,7 +69,7 @@ const AllClasses = () => {
                   <h1 className="text-lg font-semibold">{card?.title}</h1>
                   <div className="flex items-center  justify-between space-y-2 gap-2">
                     <p>Enroll by: {card?.sell_count} students</p>
-                    <div>
+                    <div className="flex items-center gap-2">
                       <p className="mt-3 text-sm text-gray-600">
                         by {card?.instructor_name}
                       </p>
@@ -86,11 +93,7 @@ const AllClasses = () => {
                             card?.Available_seats === 0
                           }
                           type="button"
-                          className={`mt-4 rounded-sm  ${
-                            role === "admin" || role === "instructor"
-                              ? "bg-red-500"
-                              : "bg-black"
-                          }  px-3 py-2 text-[14px] font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black`}
+                          className={`mt-4 rounded-sm bg-black  px-3 py-2 text-[14px] font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black`}
                         >
                           Enroll Now
                         </button>
