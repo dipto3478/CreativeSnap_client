@@ -84,7 +84,10 @@ const PaymentHistory = () => {
                         </td>
                         <td className="whitespace-nowrap px-12 py-4">
                           <div className="text-sm text-gray-900 ">
-                            {item?.title}
+                            Title: {item?.title}
+                          </div>
+                          <div className="text-sm text-gray-900 ">
+                            TxnId: {item?.txnId}
                           </div>
                         </td>
                         <td className="whitespace-nowrap px-4 py-4">

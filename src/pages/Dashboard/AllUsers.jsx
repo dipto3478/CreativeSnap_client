@@ -4,6 +4,7 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
 import Loading from "../../Shared/Loading/Loading";
+import Swal from "sweetalert2";
 
 const AllUsers = () => {
   const [users, refetch] = useUser();
@@ -11,33 +12,69 @@ const AllUsers = () => {
 
   // console.log(users);
   const handleMakeAdmin = (user) => {
-    axios
-      .patch(`${import.meta.env.VITE_URL}/users/admin/${user?._id}`)
-      .then((data) => {
-        refetch();
-        console.log(data);
-        toast.success("Successfully make Admin");
-      });
+    Swal.fire({
+      title: "Are you sure?",
+
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .patch(`${import.meta.env.VITE_URL}/users/admin/${user?._id}`)
+          .then((data) => {
+            refetch();
+            console.log(data);
+            toast.success("Successfully make Admin");
+          });
+      }
+    });
   };
 
   const handleMakeInstructor = (user) => {
-    axios
-      .patch(`${import.meta.env.VITE_URL}/users/instructor/${user?._id}`)
-      .then((data) => {
-        refetch();
-        console.log(data);
-        toast.success("Successfully make Instructor");
-      });
+    Swal.fire({
+      title: "Are you sure?",
+
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .patch(`${import.meta.env.VITE_URL}/users/instructor/${user?._id}`)
+          .then((data) => {
+            refetch();
+            console.log(data);
+            toast.success("Successfully make Instructor");
+          });
+      }
+    });
   };
   // TODO: remove
   const handleRemove = (user) => {
-    axios
-      .delete(`${import.meta.env.VITE_URL}/users/${user?._id}`)
-      .then((data) => {
-        refetch();
-        console.log(data);
-        toast.success("Successfully User remove");
-      });
+    Swal.fire({
+      title: "Are you sure?",
+
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, ",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete(`${import.meta.env.VITE_URL}/users/${user?._id}`)
+          .then((data) => {
+            refetch();
+            console.log(data);
+            toast.success("Successfully User remove");
+          });
+      }
+    });
   };
   return (
     <section>

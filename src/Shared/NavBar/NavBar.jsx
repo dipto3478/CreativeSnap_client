@@ -9,13 +9,13 @@ import { DarkModeContext } from "../DarkModeProvider/DarkModeProvider";
 const NavBar = () => {
   const { user, logOut, role } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { isDarkMode, toggleDarkMode } = useContext(DarkModeContext);
+  // const { isDarkMode, toggleDarkMode } = useContext(DarkModeContext);
 
   const nav = (
     <>
       <li>
         <Link
-          className="inline-flex items-center text-sm font-semibold text-gray-800 hover:text-gray-900"
+          className="inline-flex items-center text-sm font-semibold "
           to="/"
         >
           Home
@@ -23,7 +23,7 @@ const NavBar = () => {
       </li>
       <li>
         <Link
-          className="inline-flex items-center text-sm font-semibold text-gray-800 hover:text-gray-900"
+          className="inline-flex items-center text-sm font-semibold "
           to="/instructors"
         >
           Instructors
@@ -31,7 +31,7 @@ const NavBar = () => {
       </li>
       <li>
         <Link
-          className="inline-flex items-center text-sm font-semibold text-gray-800 hover:text-gray-900"
+          className="inline-flex items-center text-sm font-semibold "
           to="/classes"
         >
           Classes
@@ -40,7 +40,7 @@ const NavBar = () => {
       {user?.email && (
         <li>
           <Link
-            className="inline-flex items-center text-sm font-semibold text-gray-800 hover:text-gray-900"
+            className="inline-flex items-center text-sm font-semibold "
             to={`/dashboard${
               role === "admin" || role === "instructor"
                 ? "/myprofile"
@@ -68,35 +68,30 @@ const NavBar = () => {
       });
   };
   return (
-    <div className="relative w-full bg-[#EEE2DE]">
+    <div className={`relative w-full ${"bg-[#EEE2DE]"} `}>
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-6 lg:px-8">
         <div className="inline-flex items-center space-x-2">
           <Link
             to="/"
-            className="font-bold text-xl border-4 border-black px-2 py-1  border-dotted "
+            className={`font-bold text-xl ${"border-black"} border-4  px-2 py-1  border-dotted `}
           >
             Creative Snap
           </Link>
         </div>
         <div className="hidden lg:block">
-          <ul className="ml-12 inline-flex space-x-8">{nav}</ul>
+          <ul
+            className={`ml-12 inline-flex ${"text-gray-800 hover:text-gray-900"}  space-x-8`}
+          >
+            {nav}
+          </ul>
         </div>
 
         {user?.email ? (
           <>
             <div className="flex grow justify-end">
               <button
-                onClick={toggleDarkMode}
-                type="button"
-                className={`rounded-md mr-2 ${
-                  isDarkMode ? " bg-white text-black" : "bg-black text-white"
-                }  px-3 py-2 text-sm font-semibold  shadow-sm  `}
-              >
-                {isDarkMode ? "Light" : "Dark"}
-              </button>
-              <button
                 onClick={handleLogOut}
-                className="rounded-md  bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                className={`rounded-md mr-2 ${"bg-black text-white"}  px-3 py-2 text-sm font-semibold  shadow-sm  `}
               >
                 Log Out
               </button>
@@ -115,17 +110,8 @@ const NavBar = () => {
         ) : (
           <>
             <div className="flex grow justify-end">
-              <button
-                onClick={toggleDarkMode}
-                type="button"
-                className={`rounded-md mr-2 ${
-                  isDarkMode ? " bg-white text-black" : "bg-black text-white"
-                }  px-3 py-2 text-sm font-semibold  shadow-sm  `}
-              >
-                {isDarkMode ? "Light" : "Dark"}
-              </button>
               <Link
-                className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                className={`rounded-md mr-2 ${"bg-black text-white"}  px-3 py-2 text-sm font-semibold  shadow-sm  `}
                 to="/login"
               >
                 Login
@@ -135,17 +121,22 @@ const NavBar = () => {
         )}
 
         <div className="ml-2 lg:hidden">
-          <Menu onClick={toggleMenu} className="h-6 w-6 cursor-pointer" />
+          <Menu
+            onClick={toggleMenu}
+            className={`h-6 w-6 ${"text-black"} cursor-pointer`}
+          />
         </div>
         {isMenuOpen && (
           <div className="absolute inset-x-0 top-0 z-50 origin-top-right transform p-2 transition lg:hidden">
-            <div className="divide-y-2 divide-gray-50 rounded-lg bg-[#EEE2DE] shadow-lg ring-1 ring-black ring-opacity-5">
+            <div
+              className={`divide-y-2 divide-gray-50 rounded-lg ${"bg-[#EEE2DE]"} shadow-lg ring-1 ring-black ring-opacity-5`}
+            >
               <div className="px-5 pb-6 pt-5">
                 <div className="flex items-center justify-between">
                   <div className="inline-flex items-center space-x-2">
                     <Link
                       to="/"
-                      className="font-bold text-xl border-4 border-black px-2 py-1  border-dotted "
+                      className={`font-bold text-xl ${"border-black"} border-4  px-2 py-1  border-dotted `}
                     >
                       Creative Snap
                     </Link>
@@ -157,12 +148,22 @@ const NavBar = () => {
                       className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
                     >
                       <span className="sr-only">Close menu</span>
-                      <X className="h-6 w-6" aria-hidden="true" />
+                      <X
+                        className={`h-6 w-6  ${"text-black"}`}
+                        aria-hidden="true"
+                      />
                     </button>
                   </div>
                 </div>
                 <div className="mt-6">
-                  <nav className="grid gap-y-4">{nav}</nav>
+                  <nav
+                    className={`grid gap-y-4 isDarkMode
+                ? "text-[#EEE2DE] "
+                : "text-gray-800 hover:text-gray-900"
+            }`}
+                  >
+                    {nav}
+                  </nav>
                 </div>
                 <div className="ml-3 mt-4 flex items-center space-x-2">
                   <img
@@ -171,7 +172,10 @@ const NavBar = () => {
                     alt={user?.displayName}
                   />
                   <span className="flex flex-col">
-                    <span className="text-sm font-medium uppercase text-gray-900">
+                    <span
+                      className={`text-sm font-medium uppercase  "text-gray-800 hover:text-gray-900"
+           `}
+                    >
                       {user?.displayName}
                     </span>
                     <span className="text-sm font-medium text-gray-500">

@@ -79,6 +79,7 @@ const CheckOut = ({ price, item }) => {
       const txnId = paymentIntent.id;
       setTxnId(txnId);
       const payment = {
+        txnId,
         email: user?.email,
         price,
         date: formattedDate,

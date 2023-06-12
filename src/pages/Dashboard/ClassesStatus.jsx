@@ -4,6 +4,7 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
 import useAxios from "../../hooks/useAxios";
+import Swal from "sweetalert2";
 
 const ClassesStatus = () => {
   const { loading } = useAuth();
@@ -20,22 +21,46 @@ const ClassesStatus = () => {
   });
 
   const handleApproved = (user) => {
-    axios
-      .patch(`${import.meta.env.VITE_URL}/classes/approved/${user?._id}`)
-      .then((data) => {
-        refetch();
-        console.log(data.data);
-        toast.success("Successfully Approved");
-      });
+    Swal.fire({
+      title: "Are you sure?",
+
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .patch(`${import.meta.env.VITE_URL}/classes/approved/${user?._id}`)
+          .then((data) => {
+            refetch();
+            console.log(data.data);
+            toast.success("Successfully Approved");
+          });
+      }
+    });
   };
   const handleReject = (user) => {
-    axios
-      .patch(`${import.meta.env.VITE_URL}/classes/denied/${user?._id}`)
-      .then((data) => {
-        refetch();
-        console.log(data.data);
-        toast.success("Successfully Denied");
-      });
+    Swal.fire({
+      title: "Are you sure?",
+
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .patch(`${import.meta.env.VITE_URL}/classes/denied/${user?._id}`)
+          .then((data) => {
+            refetch();
+            console.log(data.data);
+            toast.success("Successfully Denied");
+          });
+      }
+    });
   };
 
   const handleFeedback = async (event, person) => {
@@ -71,7 +96,7 @@ const ClassesStatus = () => {
                     scope="col"
                     className="px-12 py-3.5 text-left text-sm font-normal text-gray-700"
                   >
-                    Title
+                    Details
                   </th>
 
                   <th
@@ -121,11 +146,17 @@ const ClassesStatus = () => {
                       <div className="text-sm text-gray-700">
                         Price: ${person?.price.toFixed(2)}
                       </div>
+                      <div className="text-sm text-gray-700">
+                        Available seats: {person?.Available_seats}
+                      </div>
                     </td>
                     <td className="whitespace-nowrap px-4 py-4">
                       <span className="inline-flex rounded-full   text-xs font-semibold leading-5 ">
                         <button
-                          disabled={person?.status === "approved"}
+                          disabled={
+                            person?.status === "approved" ||
+                            person?.status === "denied"
+                          }
                           onClick={() => handleApproved(person)}
                           className={`px-2 py-1 ${
                             person?.status === "approved"
@@ -139,6 +170,10 @@ const ClassesStatus = () => {
                     </td>
                     <td className="whitespace-nowrap px-4 py-4 text-sm text-gray-700">
                       <button
+                        disabled={
+                          person?.status === "approved" ||
+                          person?.status === "denied"
+                        }
                         onClick={() => handleReject(person)}
                         className="px-2 py-1 uppercase bg-red-500 text-white"
                       >

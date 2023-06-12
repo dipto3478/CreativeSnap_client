@@ -1,7 +1,7 @@
 import useAuth from "../../hooks/useAuth";
 
 const MyProfile = () => {
-  const { user } = useAuth();
+  const { user, role } = useAuth();
   return (
     <div className="space-y-3 flex flex-col items-center justify-center h-screen">
       <img
@@ -11,6 +11,7 @@ const MyProfile = () => {
       />
       <p className="text-lg font-semibold">Name: {user?.displayName}</p>
       <p className="text-lg font-semibold">Email: {user?.email}</p>
+      <p className="text-lg font-semibold">Role: {role ? role : "Student"}</p>
     </div>
   );
 };

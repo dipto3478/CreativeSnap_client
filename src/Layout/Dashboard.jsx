@@ -4,6 +4,7 @@ import useAuth from "../hooks/useAuth";
 
 const Dashboard = () => {
   const { role } = useAuth();
+  console.log(role);
 
   return (
     <div className="flex w-full bg-[#EEE2DE]  ">
