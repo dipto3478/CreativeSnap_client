@@ -7,7 +7,6 @@ import { useState } from "react";
 const AddClasses = () => {
   const { user } = useAuth();
   const [axiosSource] = useAxios();
-  const [item, setItem] = useState([]);
 
   const { register, handleSubmit, reset } = useForm(); // initialize the hook
   const img_hosting_url = `https://api.imgbb.com/1/upload?key=${
@@ -37,7 +36,7 @@ const AddClasses = () => {
             instructor_img: user?.photoURL,
             title,
           };
-          setItem(AllData);
+
           axiosSource.post("/classes", AllData).then((data) => {
             console.log(data);
             toast.success("successfully added class");
@@ -94,7 +93,6 @@ const AddClasses = () => {
               Price
             </label>
             <input
-              defaultValue={item?.price}
               {...register("price", { required: true })}
               className="flex h-10 w-full rounded-md border border-black/30 bg-transparent px-3 py-2 text-sm placeholder:text-gray-600 focus:outline-none focus:ring-1 focus:ring-black/30 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
               type="number"
@@ -110,7 +108,6 @@ const AddClasses = () => {
               Available seats
             </label>
             <input
-              defaultValue={item?.Available_seats}
               {...register("seats", { required: true })}
               className="flex h-10 w-full rounded-md border border-black/30 bg-transparent px-3 py-2 text-sm placeholder:text-gray-600 focus:outline-none focus:ring-1 focus:ring-black/30 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
               type="number"
@@ -128,7 +125,6 @@ const AddClasses = () => {
               Photo
             </label>
             <input
-              defaultValue={item?.image}
               {...register("photo", { required: true })}
               className="flex h-10 w-full rounded-md border border-black/30 bg-transparent px-3 py-2 text-sm placeholder:text-gray-600 focus:outline-none focus:ring-1 focus:ring-black/30 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
               type="file"
@@ -143,7 +139,6 @@ const AddClasses = () => {
               Title
             </label>
             <input
-              defaultValue={item?.title}
               {...register("title", { required: true })}
               className="flex h-10 w-full rounded-md border border-black/30 bg-transparent px-3 py-2 text-sm placeholder:text-gray-600 focus:outline-none focus:ring-1 focus:ring-black/30 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
               type="text"
