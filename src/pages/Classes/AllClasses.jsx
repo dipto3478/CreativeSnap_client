@@ -55,7 +55,9 @@ const AllClasses = () => {
               <div
                 key={card?._id}
                 className={`w-full ${
-                  role === "admin" || role === "instructor"
+                  role === "admin" ||
+                  role === "instructor" ||
+                  card?.Available_seats === 0
                     ? "bg-red-500 text-white"
                     : ""
                 }    rounded-md border`}
@@ -113,7 +115,9 @@ const AllClasses = () => {
                     <p className="font-bold">
                       Available seats: {card?.Available_seats}
                     </p>
-                    <p className="font-bold">Price: ${card?.price}</p>
+                    <p className="font-bold">
+                      Price: ${card?.price.toFixed(2)}
+                    </p>
                   </div>
                 </div>
               </div>

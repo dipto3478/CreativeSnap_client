@@ -12,8 +12,8 @@ const PopularClasses = () => {
     queryKey: ["classes"],
     enabled: !loading,
     queryFn: async () => {
-      const res = await axiosSource.get("/classes/popular");
-      // console.log(res.data);
+      const res = await axiosSource.get("/popular/classes");
+      console.log(res.data);
       return res.data;
     },
   });
@@ -113,7 +113,7 @@ const PopularClasses = () => {
                 <p className="font-bold">
                   Available seats: {card?.Available_seats}
                 </p>
-                <p className="font-bold">Price: ${card?.price}</p>
+                <p className="font-bold">Price: ${card?.price.toFixed(2)}</p>
               </div>
             </div>
           </div>

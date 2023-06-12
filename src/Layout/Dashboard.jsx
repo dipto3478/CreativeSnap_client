@@ -58,8 +58,10 @@ const Dashboard = () => {
                   className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
                   to="/dashboard/allclasses"
                 >
-                  <Users className="h-5 w-5" aria-hidden="true" />
-                  <span className="mx-2 text-sm font-medium">All Classes</span>
+                  <School className="h-5 w-5" aria-hidden="true" />
+                  <span className="mx-2 text-sm font-medium">
+                    Manage Classes
+                  </span>
                 </Link>
               )}
               {role === "instructor" && (
@@ -69,6 +71,17 @@ const Dashboard = () => {
                 >
                   <School className="h-5 w-5" aria-hidden="true" />
                   <span className="mx-2 text-sm font-medium">Add Classes</span>
+                </Link>
+              )}
+              {role === "instructor" && (
+                <Link
+                  className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
+                  to="/dashboard/myaddedclasses"
+                >
+                  <School className="h-5 w-5" aria-hidden="true" />
+                  <span className="mx-2 text-sm font-medium">
+                    My Add Classes
+                  </span>
                 </Link>
               )}
             </div>

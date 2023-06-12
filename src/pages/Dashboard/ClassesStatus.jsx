@@ -30,19 +30,28 @@ const ClassesStatus = () => {
   };
   const handleReject = (user) => {
     axios
-      .patch(`${import.meta.env.VITE_URL}/classes/approved/${user?._id}`)
+      .patch(`${import.meta.env.VITE_URL}/classes/denied/${user?._id}`)
       .then((data) => {
         refetch();
         console.log(data.data);
-        toast.success("Successfully Approved");
+        toast.success("Successfully Denied");
       });
   };
 
-  const handleFeedback = (event) => {
+  const handleFeedback = async (event, person) => {
     event.preventDefault();
     const form = event.target;
     const feedback = form.feedback.value;
-    console.log(feedback);
+    // console.log(feedback);
+
+    const response = await axios.patch(
+      `${import.meta.env.VITE_URL}/classes/feedback/${person._id}`,
+      { feedback }
+    );
+    console.log(response.data);
+    toast.success("Feedback submitted successfully");
+    refetch();
+    form.reset();
   };
   return (
     <section className="mt-6 flex flex-col">
@@ -56,7 +65,7 @@ const ClassesStatus = () => {
                     scope="col"
                     className="px-4 py-3.5 text-left text-sm font-normal text-gray-700"
                   >
-                    <span>Employee</span>
+                    <span>Instructors</span>
                   </th>
                   <th
                     scope="col"
@@ -76,7 +85,7 @@ const ClassesStatus = () => {
                     scope="col"
                     className="px-4 py-3.5 text-left text-sm font-normal text-gray-700"
                   >
-                    Reject
+                    Denied
                   </th>
                   <th scope="col" className="relative px-4 py-3.5">
                     Feedback
@@ -110,7 +119,7 @@ const ClassesStatus = () => {
                         {person?.title}
                       </div>
                       <div className="text-sm text-gray-700">
-                        Price: ${person?.price}
+                        Price: ${person?.price.toFixed(2)}
                       </div>
                     </td>
                     <td className="whitespace-nowrap px-4 py-4">
@@ -122,7 +131,7 @@ const ClassesStatus = () => {
                             person?.status === "approved"
                               ? "bg-green-500"
                               : "bg-red-500"
-                          } text-white`}
+                          } text-white uppercase`}
                         >
                           {person?.status ? person?.status : "Pending"}
                         </button>
@@ -131,28 +140,30 @@ const ClassesStatus = () => {
                     <td className="whitespace-nowrap px-4 py-4 text-sm text-gray-700">
                       <button
                         onClick={() => handleReject(person)}
-                        className="px-2 py-1 bg-red-500 text-white"
+                        className="px-2 py-1 uppercase bg-red-500 text-white"
                       >
-                        Reject
+                        Denied
                       </button>
                     </td>
                     <td className="whitespace-nowrap px-4 py-4 text-right text-sm font-medium">
-                      <form
-                        onSubmit={handleFeedback}
-                        className="flex flex-col gap-2"
-                      >
-                        <input
-                          className="border-2 border-black"
-                          type="text"
-                          name="feedback"
-                        />
-                        <button
-                          type="submit"
-                          className="px-2 py-1 bg-green-500 text-white"
+                      {person?.status === "denied" && (
+                        <form
+                          onSubmit={(event) => handleFeedback(event, person)}
+                          className="flex flex-col gap-2"
                         >
-                          Submit
-                        </button>
-                      </form>
+                          <input
+                            className="border-2 border-black"
+                            type="text"
+                            name="feedback"
+                          />
+                          <button
+                            type="submit"
+                            className="px-2 py-1 bg-green-500 text-white"
+                          >
+                            Submit
+                          </button>
+                        </form>
+                      )}
                     </td>
                   </tr>
                 ))}
