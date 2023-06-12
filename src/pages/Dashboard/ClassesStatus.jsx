@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 
 import { toast } from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
@@ -31,13 +30,11 @@ const ClassesStatus = () => {
       confirmButtonText: "Yes!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios
-          .patch(`${import.meta.env.VITE_URL}/classes/approved/${user?._id}`)
-          .then((data) => {
-            refetch();
-            console.log(data.data);
-            toast.success("Successfully Approved");
-          });
+        axiosSource.patch(`/classes/approved/${user?._id}`).then((data) => {
+          refetch();
+          console.log(data.data);
+          toast.success("Successfully Approved");
+        });
       }
     });
   };
@@ -52,13 +49,11 @@ const ClassesStatus = () => {
       confirmButtonText: "Yes",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios
-          .patch(`${import.meta.env.VITE_URL}/classes/denied/${user?._id}`)
-          .then((data) => {
-            refetch();
-            console.log(data.data);
-            toast.success("Successfully Denied");
-          });
+        axiosSource.patch(`/classes/denied/${user?._id}`).then((data) => {
+          refetch();
+          console.log(data.data);
+          toast.success("Successfully Denied");
+        });
       }
     });
   };
@@ -69,8 +64,8 @@ const ClassesStatus = () => {
     const feedback = form.feedback.value;
     // console.log(feedback);
 
-    const response = await axios.patch(
-      `${import.meta.env.VITE_URL}/classes/feedback/${person._id}`,
+    const response = await axiosSource.patch(
+      `/classes/feedback/${person._id}`,
       { feedback }
     );
     console.log(response.data);

@@ -3,7 +3,7 @@ import useAuth from "../../hooks/useAuth";
 import useAxios from "../../hooks/useAxios";
 
 import { toast } from "react-hot-toast";
-import { Trash } from "lucide-react";
+import { Edit, Trash } from "lucide-react";
 
 const MyAddedClasses = () => {
   const { user, loading } = useAuth();
@@ -60,6 +60,9 @@ const MyAddedClasses = () => {
                   <th scope="col" className="relative px-4 py-3.5">
                     Delete
                   </th>
+                  <th scope="col" className="relative px-4 py-3.5">
+                    Update
+                  </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200 bg-white">
@@ -99,6 +102,11 @@ const MyAddedClasses = () => {
                         className="p-2 text-sm rounded-full bg-red-500 text-white"
                       >
                         <Trash />
+                      </button>
+                    </td>
+                    <td className="whitespace-nowrap px-4 py-4 text-right text-sm font-medium">
+                      <button className="p-2 text-sm rounded-full bg-blue-500 text-white">
+                        <Edit />
                       </button>
                     </td>
                   </tr>

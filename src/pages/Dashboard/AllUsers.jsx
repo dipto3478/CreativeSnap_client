@@ -1,14 +1,16 @@
 import { Trash } from "lucide-react";
 import useUser from "../../hooks/useUser";
-import axios from "axios";
+
 import { toast } from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
 import Loading from "../../Shared/Loading/Loading";
 import Swal from "sweetalert2";
+import useAxios from "../../hooks/useAxios";
 
 const AllUsers = () => {
   const [users, refetch] = useUser();
   const { isLoading } = useAuth();
+  const [axiosSource] = useAxios();
 
   // console.log(users);
   const handleMakeAdmin = (user) => {
@@ -22,13 +24,11 @@ const AllUsers = () => {
       confirmButtonText: "Yes",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios
-          .patch(`${import.meta.env.VITE_URL}/users/admin/${user?._id}`)
-          .then((data) => {
-            refetch();
-            console.log(data);
-            toast.success("Successfully make Admin");
-          });
+        axiosSource.patch(`/users/admin/${user?._id}`).then((data) => {
+          refetch();
+          console.log(data);
+          toast.success("Successfully make Admin");
+        });
       }
     });
   };
@@ -44,13 +44,11 @@ const AllUsers = () => {
       confirmButtonText: "Yes",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios
-          .patch(`${import.meta.env.VITE_URL}/users/instructor/${user?._id}`)
-          .then((data) => {
-            refetch();
-            console.log(data);
-            toast.success("Successfully make Instructor");
-          });
+        axiosSource.patch(`/users/instructor/${user?._id}`).then((data) => {
+          refetch();
+          console.log(data);
+          toast.success("Successfully make Instructor");
+        });
       }
     });
   };
@@ -66,13 +64,11 @@ const AllUsers = () => {
       confirmButtonText: "Yes, ",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios
-          .delete(`${import.meta.env.VITE_URL}/users/${user?._id}`)
-          .then((data) => {
-            refetch();
-            console.log(data);
-            toast.success("Successfully User remove");
-          });
+        axiosSource.delete(`/users/${user?._id}`).then((data) => {
+          refetch();
+          console.log(data);
+          toast.success("Successfully User remove");
+        });
       }
     });
   };
